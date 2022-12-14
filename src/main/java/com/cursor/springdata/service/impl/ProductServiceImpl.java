@@ -1,5 +1,6 @@
 package com.cursor.springdata.service.impl;
 
+import com.cursor.springdata.exception.ProductNotFound;
 import com.cursor.springdata.model.Product;
 import com.cursor.springdata.repository.ProductRepository;
 import com.cursor.springdata.service.ProductService;
@@ -34,8 +35,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> getById(Long id) {
-        return productRepository.findById(id);
+    public Product getById(Long id) {
+        return productRepository.findById(id).orElseThrow(ProductNotFound::new);
     }
 
     @Override
